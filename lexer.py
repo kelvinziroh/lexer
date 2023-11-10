@@ -78,6 +78,15 @@ class Lexer:
             self.position = len(self.source_code)
         else:
             self.position = end_of_line
+    
+    # Match multi-line comments
+    def consume_multi_line_comment(self):
+        end_of_comment = self.source_code.find('*/', self.position + 2)
+        if end_of_comment == -1:
+            print("Error: Unterminated multi-line comment")
+            self.position = len(self.source_code)
+        else:
+            self.position = end_of_comment + 2
 
     # Match any predifined operator characters
     def tokenize_operator(self):
