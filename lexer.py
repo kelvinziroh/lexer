@@ -70,6 +70,14 @@ class Lexer:
             self.position += string_literal.end()
             return Token('STRING_LITERAL', string_literal.group())
         return None
+    
+    # Match single line comments
+    def consume_single_line_comment(self):
+        end_of_line = self.source_code.find('\n', self.position)
+        if end_of_line == -1:
+            self.position = len(self.source_code)
+        else:
+            self.position = end_of_line
 
     # Match any predifined operator characters
     def tokenize_operator(self):
