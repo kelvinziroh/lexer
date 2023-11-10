@@ -44,8 +44,16 @@ class Lexer:
 
     # Match valid identifiers or keywords
     def tokenize_identifier_or_keyword(self):
-        identifier = re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*', self.sourc_code[self.position:])
+        identifier = re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*', self.source_code[self.position:])
         if identifier:
             self.position += identifier.end()
             return Token('IDENTIFIER', identifier.group())
+        return None
+    
+    # Match numerical literals
+    def tokenize_literal(self):
+        literal = re.match(r'^\d+', self.source_code[self.position:])
+        if literal:
+            self.position += literal.end()
+            return Token('LITERAL', int(literal.group()))
         return None
