@@ -1,5 +1,6 @@
 # Import the regular expressions module
 import re
+import sys
 
 # Store information about each identified token
 class Token:
