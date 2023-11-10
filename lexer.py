@@ -34,6 +34,18 @@ class Lexer:
                 token = self.tokenize_identifier_or_keyword()
             elif char.isdigit():
                 token = self.tokenize_literal()
+            elif char == '"':
+                token = self.tokenize_string_literal()
+            elif char == '/':
+                next_char = self.source_code[self.position + 1] if self.position + 1 < len(self.source_code) else None
+                if next_char == '/':
+                    self.consume_single_line_comment()
+                    continue
+                elif next_char == '*':
+                    self.consume_multi_line_comment()
+                    continue
+                else:
+                    token = self.tokenize_operator()
             else:
                 token = self.tokenize_operator()
 
