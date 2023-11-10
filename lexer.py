@@ -57,3 +57,12 @@ class Lexer:
             self.position += literal.end()
             return Token('LITERAL', int(literal.group()))
         return None
+    
+    # Match any predifined operator characters
+    def tokenize_operator(self):
+        operators = ['+', '-', '*', '/', '=', '==', '!=', '<', '>', '<=', '>=']
+        for op in operators:
+            if self.source_code.startswith(op, self.position):
+                self.position += len(op)
+                return Token('OPERATOR', op)
+        return None
