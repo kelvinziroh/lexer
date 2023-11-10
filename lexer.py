@@ -41,3 +41,11 @@ class Lexer:
                 self.position += 1
 
         return self.tokens
+
+    # Match valid identifiers or keywords
+    def tokenize_identifier_or_keyword(self):
+        identifier = re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*', self.sourc_code[self.position:])
+        if identifier:
+            self.position += identifier.end()
+            return Token('IDENTIFIER', identifier.group())
+        return None
