@@ -15,8 +15,8 @@ Compiler desing is an intricate process composed of several phases of computatio
 In the following mini-project, we have focused on creating a comprehensive lexer using the python programming language. The lexer should be able to consume programs written in the C programming language and produce tokens and identify unknown characters in the source code.
 
 The lexer leverages the power of two modules to make the lexer work efficiently.
-- re module - the regular expressions module to match specific patterns within the source code
-- sys module - the system-specific parameters and functions module used to provide access to variables in the terminal which in turn allows us to read files written in C.
+- `re` module - the regular expressions module to match specific patterns within the source code
+- `sys` module - the system-specific parameters and functions module used to provide access to variables in the terminal which in turn allows us to read files written in C.
 
 To implement the lexer, we first import the two modules mentioned above:
 ```python
@@ -92,7 +92,6 @@ filename = sys.argv[1]
 
 ## Python Lexer Usage
 We built the lexer in such a way that it would be easy to use. Below are steps to follow to get a clone of the python lexer implementation and use the python lexer:
-- Click on the **Download ZIP** button if you're not familiar with the terminal.
 - Open a terminal preferably any linux terminal i.e (BASh, zsh, etc). 
 - Navigate to a desired directory.
 - Run the following command:
@@ -100,7 +99,9 @@ We built the lexer in such a way that it would be easy to use. Below are steps t
 `git clone https://github.com/kelvinziroh/lexer.git` if git is set up with **https** in your local environment
 - Navigate into the **lexer** directory
 - Type in the following command to run the `lexer.py` script on the `sample.c` C source code
-`python lexer.py sample.c`
+```
+python lexer.py sample.c
+```
 
 > **NOTE:** You can run the `lexer.py` script using the version of python installed in your local environment if the version is specifically required like so:
 ```
