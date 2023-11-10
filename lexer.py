@@ -9,3 +9,10 @@ class Token:
 
     def __str__(self):
         return f"Token({self.type}, {repr(self.value)})"
+
+# Implement the lexer
+class Lexer:
+    def __init__(self, source_code):
+        self.source_code = source_code
+        self.position = 0
+        self.tokens = []
