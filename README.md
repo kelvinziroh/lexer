@@ -103,7 +103,7 @@ We built the lexer in such a way that it would be easy to use. Below are steps t
 python lexer.py sample.c
 ```
 
-> **NOTE:** You can run the `lexer.py` script using the version of python installed in your local environment if the version is specifically required like so:
+> **NOTE:** You can run the `lexer.py` script using with any other C program. The `sample.c` file is just meant to provide a demonstration of the output produced by the lexer. Hence the command could be:
 ```
-python3 lexer.py sample.c
+python lexer.py hello_world.c
 ```
