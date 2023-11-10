@@ -2,6 +2,7 @@
 import re
 import sys
 
+
 # Store information about each identified token
 class Token:
     def __init__(self, token_type, value):
@@ -11,13 +12,14 @@ class Token:
     def __str__(self):
         return f"Token({self.type}, {repr(self.value)})"
 
+
 # Implement the lexer
 class Lexer:
     def __init__(self, source_code):
         self.source_code = source_code
         self.position = 0
         self.tokens = []
-    
+
     def tokenize(self):
         while self.position < len(self.source_code):
             char = self.source_code[self.position]
@@ -34,7 +36,7 @@ class Lexer:
                 token = self.tokenize_literal()
             else:
                 token = self.tokenize_operator()
-            
+
             if token:
                 self.tokens.append(token)
             else:
@@ -45,25 +47,58 @@ class Lexer:
 
     # Match valid identifiers or keywords
     def tokenize_identifier_or_keyword(self):
-        identifier = re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*', self.source_code[self.position:])
+        identifier = re.match(
+            r"^[a-zA-Z_][a-zA-Z0-9_]*", self.source_code[self.position :]
+        )
         if identifier:
             self.position += identifier.end()
-            return Token('IDENTIFIER', identifier.group())
+            return Token("IDENTIFIER", identifier.group())
         return None
-    
+
     # Match numerical literals
     def tokenize_literal(self):
-        literal = re.match(r'^\d+', self.source_code[self.position:])
+        literal = re.match(r"^\d+", self.source_code[self.position :])
         if literal:
             self.position += literal.end()
-            return Token('LITERAL', int(literal.group()))
+            return Token("LITERAL", int(literal.group()))
         return None
-    
+
     # Match any predifined operator characters
     def tokenize_operator(self):
-        operators = ['+', '-', '*', '/', '=', '==', '!=', '<', '>', '<=', '>=']
+        operators = ["+", "-", "*", "/", "=", "==", "!=", "<", ">", "<=", ">="]
         for op in operators:
             if self.source_code.startswith(op, self.position):
                 self.position += len(op)
-                return Token('OPERATOR', op)
+                return Token("OPERATOR", op)
         return None
+
+
+# Read files to perform lexical analysis
+def main():
+    # Check if the terminal argument is valid
+    if len(sys.argv) != 2:
+        sys.exit("Usage: python lexer.py <filename>")
+
+    # Get the file
+    filename = sys.argv[1]
+
+    try:
+        # Open the file in read mode
+        with open(filename, "r") as file:
+            source_code = file.read()
+    except FileNotFoundError:
+        # Raise FileNotFoundError if the file specified is not found
+        sys.exit(f"Error: File '{filename}' not found.")
+
+    # Create a lexer object and tokenize it
+    lexer = Lexer(source_code)
+    tokens = lexer.tokenize()
+
+    # Display each token produced from the source code
+    for token in tokens:
+        print(token)
+
+
+# Call main function
+if __name__ == "__main__":
+    main()
