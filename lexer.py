@@ -62,6 +62,14 @@ class Lexer:
             self.position += literal.end()
             return Token("LITERAL", int(literal.group()))
         return None
+    
+    # Match string literals
+    def tokenize_string_literal(self):
+        string_literal = re.match(r'^"([^"\\]|\\.)*"', self.source_code[self.position:])
+        if string_literal:
+            self.position += string_literal.end()
+            return Token('STRING_LITERAL', string_literal.group())
+        return None
 
     # Match any predifined operator characters
     def tokenize_operator(self):
