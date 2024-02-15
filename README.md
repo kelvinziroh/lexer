@@ -103,7 +103,18 @@ We built the lexer in such a way that it would be easy to use. Below are steps t
 python lexer.py sample.c
 ```
 
-> **NOTE:** You can run the `lexer.py` script using with any other C program. The `sample.c` file is just meant to provide a demonstration of the output produced by the lexer. Hence the command could be:
+> **NOTE:** You can name the C program to be passed to the `lexer.py` script anything. For instance, you could pass the `number_line.c` file to the lexer like so:
 ```
-python lexer.py hello_world.c
+python lexer.py number_line.c
 ```
+
+## Curios?
+If your curious about what the C code does in both sample files, this demonstrates how to run them on an OSX or linux terminal.
+To run C programs, they first have to be compiled. to compile the C program just open up a terminal, navigate to the 
+directory that contains the C programs, and type in the following code:
+```
+make sample.c
+```
+The command above will create compiled program named `sample`. This is the binary file that will be executed. You can actually check the type of the file by running `file sample` command on the terminal and it should display `sample: Mach-O 64-bit executable x86_64`. It might display a different result on a different operating system but the keyword in the output is *executable*.
+
+Finally to run the file, type in `./sample` command in the terminal and it should run the executable binary file.
